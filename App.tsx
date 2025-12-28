@@ -5,15 +5,17 @@ import { supabase, isConfigured } from './supabase';
 import { User, Bet, GameResult, AppConfig, GameMode, RechargeRequest, WithdrawRequest, Language, BetColor } from './types';
 import { INITIAL_CONFIG, COLOR_MAP, BIG_SMALL_MAP, MULTIPLIERS } from './constants';
 import { translations } from './translations';
-import Home from './pages/Home';
-import Aviator from './pages/Aviator';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Wallet from './pages/Wallet';
-import Referral from './pages/Referral';
-import Profile from './pages/Profile';
-import Admin from './pages/Admin';
-import BottomNav from './components/BottomNav';
+
+// Explicitly importing with .tsx extension to help Vite/Vercel resolver
+import Home from './pages/Home.tsx';
+import Aviator from './pages/Aviator.tsx';
+import Login from './pages/Login.tsx';
+import Register from './pages/Register.tsx';
+import Wallet from './pages/Wallet.tsx';
+import Referral from './pages/Referral.tsx';
+import Profile from './pages/Profile.tsx';
+import Admin from './pages/Admin.tsx';
+import BottomNav from './components/BottomNav.tsx';
 
 interface AppState {
   user: User | null;
@@ -195,7 +197,6 @@ const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return isAdmin ? <>{children}</> : <Navigate to="/login" />;
 };
 
-// Global Notice Overlay Component
 const NoticeOverlay = () => {
   const { user, setUser } = useApp();
   const [clearing, setClearing] = useState(false);
@@ -256,3 +257,4 @@ const AppContent = () => {
 export default function App() {
   return <AppProvider><Router><AppContent /></Router></AppProvider>;
 }
+

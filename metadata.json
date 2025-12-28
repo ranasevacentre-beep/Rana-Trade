@@ -1,0 +1,8 @@
+
+{
+  "name": "Rana Color Trade",
+  "description": "Premium real-time color prediction and trading platform with multi-level referral and secure wallet.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

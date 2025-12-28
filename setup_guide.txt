@@ -1,0 +1,32 @@
+
+🚀 RANA TRADE - DATABASE SETUP GUIDE
+------------------------------------
+
+1. Supabase Dashboard > SQL Editor > New Query.
+2. रन करें (Name और blockReason जोड़ने के लिए):
+
+-- [MIGRATION] Add New Columns --
+ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS "name" TEXT;
+ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS "blockReason" TEXT;
+
+-- [TABLE] Help Requests Appeals --
+CREATE TABLE IF NOT EXISTS help_requests (
+  id TEXT PRIMARY KEY,
+  "userId" TEXT REFERENCES users(id),
+  mobile TEXT,
+  name TEXT,
+  message TEXT,
+  status TEXT DEFAULT 'PENDING',
+  "createdAt" BIGINT
+);
+
+-- Reset config for consistency --
+UPDATE config SET "minRecharge" = 100 WHERE id = 1;
+
+✅ [IMP] महत्वपूर्ण: 
+SQL रन करने के बाद अगर 'name column missing' एरर आए, तो:
+1. Supabase Dashboard में Settings > API पर जाएँ।
+2. "PostgREST API" सेक्शन के अंत में "Reload Schema" बटन दबाएँ।
+3. या फिर 1-2 मिनट इंतज़ार करें, Cache अपने आप अपडेट हो जाएगा।
+
+✅ अब ऐप रिफ्रेश करें!
